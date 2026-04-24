@@ -1,37 +1,61 @@
 {% extends "base.html" %}
 
 {% block title %}Home | Fake News Detection{% endblock %}
+{% block body_class %}page-home{% endblock %}
 
 {% block content %}
 <section class="hero-card reveal">
-    <div class="hero-text">
-        <span class="eyebrow">AI-powered news verification</span>
-        <h1>Check whether a news headline or short article looks real, fake, or uncertain.</h1>
-        <p>
-            This beginner-friendly Flask project uses the Gemini API to read news text,
-            explain its reasoning, and highlight possible warning signs in a clean web interface.
+    <div class="hero-copy">
+        <span class="eyebrow">Editorial intelligence platform</span>
+        <h1>Evaluate suspicious news text with a cleaner, more credible decision workspace.</h1>
+        <p class="hero-intro">
+            Paste a headline, article summary, or short report and get a fast credibility assessment,
+            confidence signal, and risk indicators in a structured interface designed for clarity.
         </p>
+        <div class="hero-actions">
+            <a href="#analysis-workbench" class="primary-button">Start Analysis</a>
+            <a href="{{ url_for('about') }}" class="secondary-button">How It Works</a>
+        </div>
         <div class="hero-stats">
             <div class="stat-card">
-                <strong>3 Results</strong>
-                <span>Likely Real, Likely Fake, Uncertain</span>
+                <span class="stat-label">Classification</span>
+                <strong>Real, Fake, Uncertain</strong>
+                <p>Simple output states with supporting explanation.</p>
             </div>
             <div class="stat-card">
-                <strong>Login + History</strong>
-                <span>Save past analyses in SQLite</span>
+                <span class="stat-label">Confidence Score</span>
+                <strong>0 to 100%</strong>
+                <p>Quick numerical signal for presentation and review.</p>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Saved History</span>
+                <strong>Account-based tracking</strong>
+                <p>Store earlier checks and export them when needed.</p>
             </div>
         </div>
     </div>
-    <div class="hero-badge">
-        <div class="badge-circle">AI</div>
-        <p>Simple architecture for mini project and final year demos.</p>
-    </div>
+    <aside class="hero-aside">
+        <div class="signal-card">
+            <div class="signal-card-header">
+                <span>System Capabilities</span>
+                <span class="signal-status">Ready</span>
+            </div>
+            <ul class="signal-list">
+                <li>Analyzes news text using the configured Gemini model</li>
+                <li>Returns result, confidence, reason, and warning indicators</li>
+                <li>Supports three output types: Real, Fake, and Uncertain</li>
+                <li>Logged-in users can save and review previous analyses</li>
+                <li>History can be exported as CSV from the dashboard</li>
+            </ul>
+        </div>
+    </aside>
 </section>
 
-<section class="card analysis-card reveal">
+<section class="card analysis-card reveal" id="analysis-workbench">
     <div class="section-heading">
-        <h2>Analyze News Text</h2>
-        <p>Paste a headline, article summary, or short news paragraph below.</p>
+        <span class="section-kicker">Analysis Workbench</span>
+        <h2>Submit text for credibility screening</h2>
+        <p>Use a headline, article excerpt, or short news paragraph. Clearer input usually leads to stronger reasoning.</p>
     </div>
 
     <form action="{{ url_for('analyze') }}" method="POST" id="analyzeForm">
@@ -41,12 +65,12 @@
             name="news_text"
             rows="8"
             maxlength="3000"
-            placeholder="Example: A report claims a major city has banned all internet access after midnight..."
+            placeholder="Paste the article headline or a short news paragraph here..."
             required
         ></textarea>
         <div class="form-meta">
             <span id="charCount">0 / 3000 characters</span>
-            <span>Minimum recommended: 20 characters</span>
+            <span>Recommended minimum: 20 characters</span>
         </div>
         <button type="submit" class="primary-button" id="analyzeButton">
             <span class="button-text">Analyze</span>
@@ -57,16 +81,19 @@
 
 <section class="feature-grid reveal">
     <article class="card feature-card">
-        <h3>Smart Classification</h3>
-        <p>Gemini reads the text and returns a simple JSON response with result, confidence, reason, and warnings.</p>
+        <span class="feature-index">01</span>
+        <h3>Structured Assessment</h3>
+        <p>The interface separates classification, confidence, reasoning, and warnings so results feel deliberate instead of cluttered.</p>
     </article>
     <article class="card feature-card">
-        <h3>User Accounts</h3>
-        <p>Students can sign up, log in, and review their previous analysis history for project demonstrations.</p>
+        <span class="feature-index">02</span>
+        <h3>Presentation-Ready Flow</h3>
+        <p>Cleaner spacing, stronger visual hierarchy, and calmer colors make the project look more credible during demos or reviews.</p>
     </article>
     <article class="card feature-card">
-        <h3>Easy to Understand</h3>
-        <p>The project uses plain Flask routes, SQLite tables, Jinja templates, and basic JavaScript.</p>
+        <span class="feature-index">03</span>
+        <h3>Account and History Support</h3>
+        <p>Sign in to keep prior checks, review past results, and export history for academic or internal reporting needs.</p>
     </article>
 </section>
 {% endblock %}

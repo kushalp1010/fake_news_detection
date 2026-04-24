@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}History | Fake News Detection{% endblock %}
+{% block body_class %}page-history{% endblock %}
 
 {% block content %}
 <section class="card reveal">
     <div class="section-heading history-header">
         <div>
-            <h2>Analysis History</h2>
-            <p>Review all saved analyses for your account.</p>
+            <span class="section-kicker">Saved Records</span>
+            <h2>Analysis history</h2>
+            <p>Review prior credibility checks stored for your account.</p>
         </div>
         <div class="history-actions">
             <a href="{{ url_for('export_history') }}" class="secondary-button">Export CSV</a>
@@ -49,7 +51,7 @@
     {% else %}
         <div class="empty-state">
             <h3>No saved history yet</h3>
-            <p>Analyze some news text on the home page and your results will appear here.</p>
+            <p>Once you analyze and save submissions, they will appear here in a structured archive table.</p>
             <a href="{{ url_for('index') }}" class="primary-button">Go to Analyzer</a>
         </div>
     {% endif %}

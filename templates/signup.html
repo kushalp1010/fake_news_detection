@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}Sign Up | Fake News Detection{% endblock %}
+{% block body_class %}page-auth{% endblock %}
 
 {% block content %}
 <section class="auth-card card reveal">
     <div class="section-heading">
-        <h2>Create Account</h2>
-        <p>Sign up to save analysis results and access your personal history page.</p>
+        <span class="section-kicker">Create Account</span>
+        <h2>Set up your analysis workspace</h2>
+        <p>Create an account to save results, revisit previous checks, and export your review history later.</p>
     </div>
 
     <form action="{{ url_for('signup') }}" method="POST" class="auth-form">
@@ -19,7 +21,7 @@
         <label for="password" class="input-label">Password</label>
         <input type="password" id="password" name="password" placeholder="Minimum 6 characters" required>
 
-        <button type="submit" class="primary-button full-width">Sign Up</button>
+        <button type="submit" class="primary-button full-width">Create Account</button>
         <p class="form-footnote">Already registered? <a href="{{ url_for('login') }}">Login here</a>.</p>
     </form>
 </section>

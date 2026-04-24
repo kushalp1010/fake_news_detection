@@ -5,7 +5,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const analyzeButton = document.getElementById("analyzeButton");
     const loadingSpinner = document.getElementById("loadingSpinner");
     const themeToggle = document.getElementById("themeToggle");
+    const themeToggleLabel = themeToggle?.querySelector(".theme-toggle-label");
+    const themeToggleIcon = themeToggle?.querySelector(".theme-toggle-icon");
     const copyResultButton = document.getElementById("copyResultButton");
+
+    const applyThemeLabel = (isDark) => {
+        if (!themeToggle) {
+            return;
+        }
+
+        if (themeToggleLabel) {
+            themeToggleLabel.textContent = isDark ? "Light" : "Dark";
+        }
+
+        if (themeToggleIcon) {
+            themeToggleIcon.textContent = isDark ? "L" : "D";
+        }
+
+        themeToggle.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+    };
 
     if (textarea && charCount) {
         const updateCount = () => {
@@ -30,17 +48,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         document.body.classList.add("dark-mode");
-        if (themeToggle) {
-            themeToggle.textContent = "Light";
-        }
     }
+    applyThemeLabel(document.body.classList.contains("dark-mode"));
 
     if (themeToggle) {
         themeToggle.addEventListener("click", () => {
             document.body.classList.toggle("dark-mode");
             const isDark = document.body.classList.contains("dark-mode");
             localStorage.setItem("theme", isDark ? "dark" : "light");
-            themeToggle.textContent = isDark ? "Light" : "Dark";
+            applyThemeLabel(isDark);
         });
     }
 
