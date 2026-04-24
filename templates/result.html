@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Analysis Result | Fake News Detection{% endblock %}
+
+{% block content %}
+<section class="card result-layout reveal">
+    <div class="section-heading">
+        <h2>Analysis Result</h2>
+        <p>Your news text has been reviewed by the Gemini-powered analyzer.</p>
+    </div>
+
+    <div class="result-top">
+        <div class="result-pill result-{{ result_data.result|lower }}">{{ result_label }}</div>
+        <div class="confidence-box">
+            <span>Confidence</span>
+            <strong>{{ result_data.confidence }}%</strong>
+        </div>
+    </div>
+
+    <div class="result-grid">
+        <div class="result-panel">
+            <h3>Entered News Text</h3>
+            <p class="news-preview">{{ result_data.news_text }}</p>
+        </div>
+        <div class="result-panel">
+            <h3>Short Explanation</h3>
+            <p>{{ result_data.reason }}</p>
+        </div>
+    </div>
+
+    <div class="result-panel">
+        <h3>Risk Indicators</h3>
+        {% if result_data.warnings %}
+            <ul class="warning-list">
+                {% for warning in result_data.warnings %}
+                    <li>{{ warning }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No specific warning signs were returned by the model.</p>
+        {% endif %}
+    </div>
+
+    <div class="action-row">
+        <a href="{{ url_for('index') }}" class="secondary-button">Back</a>
+        {% if g.user %}
+            <a href="{{ url_for('history') }}" class="primary-button">View Saved History</a>
+        {% else %}
+            <a href="{{ url_for('signup') }}" class="primary-button">Create Account to Save More</a>
+        {% endif %}
+        <button type="button" id="copyResultButton" class="ghost-button">Copy Result</button>
+    </div>
+</section>
+{% endblock %}

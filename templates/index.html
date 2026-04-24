@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Fake News Detection{% endblock %}
+
+{% block content %}
+<section class="hero-card reveal">
+    <div class="hero-text">
+        <span class="eyebrow">AI-powered news verification</span>
+        <h1>Check whether a news headline or short article looks real, fake, or uncertain.</h1>
+        <p>
+            This beginner-friendly Flask project uses the Gemini API to read news text,
+            explain its reasoning, and highlight possible warning signs in a clean web interface.
+        </p>
+        <div class="hero-stats">
+            <div class="stat-card">
+                <strong>3 Results</strong>
+                <span>Likely Real, Likely Fake, Uncertain</span>
+            </div>
+            <div class="stat-card">
+                <strong>Login + History</strong>
+                <span>Save past analyses in SQLite</span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-badge">
+        <div class="badge-circle">AI</div>
+        <p>Simple architecture for mini project and final year demos.</p>
+    </div>
+</section>
+
+<section class="card analysis-card reveal">
+    <div class="section-heading">
+        <h2>Analyze News Text</h2>
+        <p>Paste a headline, article summary, or short news paragraph below.</p>
+    </div>
+
+    <form action="{{ url_for('analyze') }}" method="POST" id="analyzeForm">
+        <label for="news_text" class="input-label">News Text</label>
+        <textarea
+            id="news_text"
+            name="news_text"
+            rows="8"
+            maxlength="3000"
+            placeholder="Example: A report claims a major city has banned all internet access after midnight..."
+            required
+        ></textarea>
+        <div class="form-meta">
+            <span id="charCount">0 / 3000 characters</span>
+            <span>Minimum recommended: 20 characters</span>
+        </div>
+        <button type="submit" class="primary-button" id="analyzeButton">
+            <span class="button-text">Analyze</span>
+            <span class="spinner hidden" id="loadingSpinner"></span>
+        </button>
+    </form>
+</section>
+
+<section class="feature-grid reveal">
+    <article class="card feature-card">
+        <h3>Smart Classification</h3>
+        <p>Gemini reads the text and returns a simple JSON response with result, confidence, reason, and warnings.</p>
+    </article>
+    <article class="card feature-card">
+        <h3>User Accounts</h3>
+        <p>Students can sign up, log in, and review their previous analysis history for project demonstrations.</p>
+    </article>
+    <article class="card feature-card">
+        <h3>Easy to Understand</h3>
+        <p>The project uses plain Flask routes, SQLite tables, Jinja templates, and basic JavaScript.</p>
+    </article>
+</section>
+{% endblock %}

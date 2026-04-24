@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}About | Fake News Detection{% endblock %}
+
+{% block content %}
+<section class="card reveal">
+    <div class="section-heading">
+        <h2>About This Project</h2>
+        <p>A simple college-friendly Flask project for understanding fake news detection concepts.</p>
+    </div>
+
+    <div class="about-grid">
+        <article class="feature-card">
+            <h3>What is Fake News?</h3>
+            <p>
+                Fake news is false, misleading, or manipulated information presented as if it were true news.
+                It can spread quickly on social media and mislead readers.
+            </p>
+        </article>
+        <article class="feature-card">
+            <h3>How This Project Works</h3>
+            <p>
+                The user enters a headline or short article. Flask sends that text to the Gemini API with a JSON prompt.
+                The system then shows a result, confidence score, explanation, and warning signs.
+            </p>
+        </article>
+        <article class="feature-card">
+            <h3>Technologies Used</h3>
+            <p>
+                Python 3, Flask, Jinja2, SQLite, HTML5, CSS3, JavaScript, Google Gemini API, and Werkzeug security utilities.
+            </p>
+        </article>
+    </div>
+
+    <div class="card mini-info">
+        <h3>Project Flow</h3>
+        <p>Input Text -> Flask Validation -> Gemini Analysis -> JSON Parsing -> Result Display -> Optional History Save</p>
+    </div>
+</section>
+{% endblock %}
