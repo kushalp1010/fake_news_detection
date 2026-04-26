@@ -44,6 +44,10 @@ load_dotenv(BASE_DIR / ".env")
 logger.info("Starting Fake News Detection application")
 
 app = Flask(__name__)
+
+# Get port from environment (Render provides this)
+PORT = int(os.getenv("PORT", 5000))
+
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "change-this-secret-key")
 app.config["DATABASE"] = str(BASE_DIR / "database.db")
 app.config["GEMINI_MODEL"] = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
@@ -495,10 +499,8 @@ def about():
     return render_template("about.html")
 
 
-with app.app_context():
-    init_db()
-
-
+# Run the app - required for local development, gunicorn handles it in production
 if __name__ == "__main__":
-    logger.info("Starting Flask development server")
-    app.run(debug=True)
+    with app.app_context():
+        init_db()
+    app.run(host="0.0.0.0", port=PORT, debug=False)
